@@ -1,107 +1,44 @@
-MERMAID Architecture Ethos
+# MERMAID Architecture Ethos
 
-This repository documents the architecture of the MERMAID software and data ecosystem.
+This repository records the long-term architecture of the MERMAID software and data ecosystem. It describes the conceptual model before implementation; it does not prescribe a data migration or replace existing operational workflows.
 
-Its purpose is to provide a durable, high-level view of how repositories, workflows, and data products relate to one another. The goal is not to document implementation details, but to explain the structure of the system and the reasoning behind it.
+## Core principles
 
-Core Principles
+### Repository names describe tools; directory names describe durable data families
 
-Repository names describe tools
+Repositories are implementations and may be replaced, merged, split, archived, or rewritten. Examples include `automaid`, `mermaid-records`, `mermaid-timelines`, `mermaid-catalogs`, `mermaid-buffer`, `cfneic`, and `mermaid-gcmt`.
 
-Repositories are implementations.
+Directory names should normally describe scientific or operational data families that persist independently of a particular producer. This is a guiding principle, not an absolute naming rule. Long-established workflow trees such as `server/`, `processed/`, and `events/` retain architectural value: they encode operational semantics and support a decade or more of code and practice.
 
-Examples:
+### Preserve established paths when they carry compatibility and workflow meaning
 
-* mermaid-records
-* mermaid-timelines
-* mermaid-catalogs
-* mermaid-buffer
-* automaid
-* cfneic
-* mermaid-gcmt
+Do not rename or migrate an established tree merely to obtain a cleaner clean-slate name. `server/`, `processed/`, and `events/` remain canonical workflow trees. A `legacy/` area may be useful when practical, but its layout and any migration are not yet settled.
 
-Repositories may be replaced, merged, split, archived, or rewritten over time.
+### Canonical trees own bytes; curated views improve access
 
-Directory names describe durable data families
+Canonical or workflow trees own the real bytes. Curated data-family views may expose those canonical files through symlinks when the need is lookup or organization, not a change in data ownership. Such views are reversible and avoid unnecessary physical migration or duplicated bytes.
 
-Directories represent scientific or operational data products that persist independently of the software used to generate them.
+For example, `waveforms/` is a flat view of waveform files owned by `processed/`, and `associations/` is a flat view of all reviewed `.evt` outcomes owned by `events/`: identified positive associations and unidentified authoritative null results. Neither view replaces its full canonical workflow tree.
 
-Examples:
+### Reconcile aggregates when ownership requires it
 
-* raw/
-* waveforms/
-* metadata/
-* associations/
-* catalogs/
-* records/
-* timelines/
+When several acquisition sources can contain overlapping logical files, retain a real canonical aggregate that can compare and reconcile those sources. A symlink view is appropriate only when the underlying bytes are already canonical and the problem is solely layout or lookup. Thus `server/` is the byte-owning reconciled aggregate of raw MERMAID source data, not merely a view of source-specific mirrors.
 
-A single tool may produce multiple data families.
+### Prefer scientific concepts without erasing useful history
 
-Multiple tools may contribute to the same data family.
+Names such as `waveforms/`, `associations/`, and `catalogs/` clarify durable scientific concepts. Introduce them where they solve concrete problems, while preserving the established trees that contain wider workflow context.
 
-Therefore data directories should not generally be named after software packages.
-
-Prefer scientific concepts over implementation details
-
-Names should describe what the data is, not how it was produced.
-
-Prefer:
-
-* waveforms/
-* associations/
-* catalogs/
-
-over:
-
-* automaid/
-* processed/
-* events/
-
-unless the software identity itself is the important concept.
-
-Preserve history
-
-Historical layouts should not be rewritten simply for aesthetic reasons.
-
-Legacy structures should be retained in a dedicated legacy/ area when practical, allowing modern workflows to evolve without losing provenance or breaking historical references.
-
-Architecture before implementation
+### Architecture before implementation
 
 When making structural changes:
 
 1. Define the conceptual model.
-2. Define the data families.
-3. Define the relationships between them.
-4. Implement the software changes.
+2. Define ownership and data-family boundaries.
+3. Define relationships and compatibility expectations.
+4. Implement software or migrations only after those decisions are made.
 
-The architecture should drive the codebase, not the other way around.
+The architecture should guide implementation, while documenting unresolved questions honestly rather than turning them into premature commitments.
 
-Initial Data Families
+## Architecture repository
 
-The current working model is:
-
-* raw/
-* waveforms/
-* metadata/
-* associations/
-* catalogs/
-* records/
-* timelines/
-
-These are expected to evolve as the ecosystem grows.
-
-Architecture Repository
-
-This repository is intended to serve as the central map of the MERMAID ecosystem.
-
-It should contain:
-
-* High-level workflow diagrams
-* Repository relationship diagrams
-* Data-flow diagrams
-* Architecture decision records
-* Notes on naming, provenance, and system evolution
-
-The architecture should be understandable to a new contributor without requiring
-inspection of individual repositories.
+This repository is the central high-level map of the MERMAID ecosystem. It contains workflow and data-flow diagrams, architecture decisions, and notes on naming, provenance, and system evolution. It should help a new contributor understand the system without requiring inspection of every implementation repository.
