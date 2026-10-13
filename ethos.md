@@ -12,7 +12,7 @@ Directory names should normally describe scientific or operational data families
 
 ### Preserve established paths when they carry compatibility and workflow meaning
 
-Do not rename or migrate an established tree merely to obtain a cleaner clean-slate name. `server/`, `processed/`, and `events/` remain canonical workflow trees. A `legacy/` area may be useful when practical, but its layout and any migration are not yet settled.
+Do not rename or migrate an established tree merely to obtain a cleaner clean-slate name. `server/`, `processed/`, and `events/` remain canonical workflow trees. Historical server trees are preserved under `legacy/servers/`, keeping their source identity without conflicting with the current canonical meaning of `server/`. The layout of any other legacy areas remains unsettled.
 
 ### Canonical trees own bytes; curated views improve access
 

@@ -6,7 +6,7 @@
 
 Use this repository to understand how MERMAID data move from acquisition through processing, review, derived products, and external archival, and to locate the architectural decisions that shape those workflows.
 
-The architecture distinguishes canonical and workflow trees that own bytes from curated views that may use symlinks, independent derived-product branches, and external archival or reference systems. Established workflow trees such as `server/`, `processed/`, and `events/` remain canonical; `waveforms/` and `associations/` are curated views that improve access without taking ownership of those bytes. The waveform view is the top-level `$MERMAID/waveforms/` path, not a `processed/waveforms/` subtree.
+The architecture distinguishes canonical and workflow trees that own bytes from curated views that may use symlinks, independent derived-product branches, and external archival or reference systems. Established workflow trees such as `server/`, `processed/`, and `events/` remain canonical; `waveforms/` and `associations/` are curated views that improve access without taking ownership of those bytes. The waveform view is the top-level `$MERMAID/waveforms/` path, not a `processed/waveforms/` subtree. Historical server trees are preserved separately under `$MERMAID/legacy/servers/` so that they do not conflict with the current meaning of `$MERMAID/server/`.
 
 ## Architecture
 

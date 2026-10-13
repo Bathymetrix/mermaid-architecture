@@ -16,6 +16,15 @@ flowchart LR
 
 `servers/<user-or-source>/...` names a possible source-specific acquisition layout; its exact naming is not frozen. These mirrors preserve acquisition provenance and can overlap. `server/` is the real, byte-owning canonical aggregate, which may reconcile overlapping upstream copies. The intended direction is to reclaim the unsuffixed `server/` name for this aggregate rather than continue with a `_everyone` suffix; migration mechanics remain unresolved.
 
+Following the 2026-10-13 reorganization, historical server trees are preserved separately under `legacy/servers/`, rather than participating in the active `servers/` mirror namespace or changing the canonical meaning of `server/`. The current source-name mapping is:
+
+- `legacy/servers/jamstec/` — originally `server_jamstec/`
+- `legacy/servers/princeton/` — originally `server/`
+- `legacy/servers/stanford/` — originally `server_stanford/`
+- `legacy/servers/sustech/` — originally `server_sustech/`
+
+The historical `legacy/servers/princeton/` name is particularly important: its former `server/` path refers to the Princeton-era tree, not the current reconciled canonical aggregate.
+
 `processed/` remains the canonical, heterogeneous automaid output and workflow tree. It owns waveform bytes and contains more than waveform products. Existing default automaid behavior and consumers using `processed/` remain unchanged.
 
 `events/` remains the byte-owning event-review workflow tree. It includes candidate material and reviewed identified and unidentified outcomes, as well as other workflow artifacts. Candidate data remain durable after review. An identified reviewed `.evt` contains the one selected authoritative association; if no acceptable event exists, the reviewed/unidentified workflow retains an empty `.evt`.
