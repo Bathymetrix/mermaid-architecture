@@ -46,10 +46,11 @@ servers/<source-or-user>/...    source-specific acquisition mirrors
               v
 server/                         byte-owning reconciled aggregate
               |- processed/     byte-owning heterogeneous automaid workflow
-              |     |- events/  byte-owning candidate/review workflow
-              |     `- waveforms/{sac,mseed}/  symlink lookup view
-              |
+              |     `- events/  byte-owning candidate/review workflow
               `- records/ -> timelines/
+
+processed/ --symlink targets--> waveforms/{sac,mseed}/
+                                  top-level lookup view, not processed/waveforms/
 
 events/reviewed/identified/     non-empty authoritative .evt bytes
 events/reviewed/unidentified/   empty authoritative .evt null assertions

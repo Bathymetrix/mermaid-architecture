@@ -18,7 +18,7 @@ Do not rename or migrate an established tree merely to obtain a cleaner clean-sl
 
 Canonical or workflow trees own the real bytes. Curated data-family views may expose those canonical files through symlinks when the need is lookup or organization, not a change in data ownership. Such views are reversible and avoid unnecessary physical migration or duplicated bytes.
 
-For example, `waveforms/` is a flat view of waveform files owned by `processed/`, and `associations/` is a flat view of all reviewed `.evt` outcomes owned by `events/`: identified positive associations and unidentified authoritative null results. Neither view replaces its full canonical workflow tree.
+For example, top-level `waveforms/` is a flat view of waveform files owned by `processed/`; it is not a `processed/waveforms/` subtree. `associations/` is a flat view of all reviewed `.evt` outcomes owned by `events/`: identified positive associations and unidentified authoritative null results. Neither view replaces its full canonical workflow tree.
 
 ### Reconcile aggregates when ownership requires it
 

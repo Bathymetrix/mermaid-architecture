@@ -37,7 +37,7 @@ flowchart LR
     publication --> dmc["EarthScope DMC: external archive and publication"]
 ```
 
-`waveforms/` is a new flat symlink view for efficient lookup of canonical SAC and miniSEED files physically owned under `processed/`. DET and REQ are both waveform types, not separate top-level streams. SAC files remain writable: writing through a symlink changes the canonical target. New or migrated consumers may use this view, while existing `processed/` users continue to work.
+`waveforms/` is a new top-level flat symlink view at `$MERMAID/waveforms/`, not a `processed/waveforms/` subtree. It provides efficient lookup of canonical SAC and miniSEED files physically owned under `processed/`. DET and REQ are both waveform types, not separate top-level streams. SAC files remain writable: writing through a symlink changes the canonical target. New or migrated consumers should use this view, while existing `processed/` users continue to work.
 
 `associations/` is a new curated symlink view of all reviewed `.evt` outcomes. Its `identified/` and `unidentified/` subdirectories contain symlinks that point to the byte-owning canonical files in `events/reviewed/identified/` and `events/reviewed/unidentified/`, respectively. Identified files are non-empty authoritative waveform-to-event associations; unidentified files are empty authoritative reviewed null results, meaning no acceptable event association exists. Candidate and preliminary `.evt` sets remain only in the broader `events/` workflow and are not exposed through `associations/`. A waveform may have no identified association, so the positive relationship is not strictly one-to-one; when one exists, matching waveform and `.evt` basenames provide a useful lookup contract.
 
