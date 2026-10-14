@@ -29,6 +29,8 @@ The historical `legacy/servers/princeton/` name is particularly important: its f
 
 `events/` remains the byte-owning event-review workflow tree. It includes candidate material and reviewed identified and unidentified outcomes, as well as other workflow artifacts. Candidate data remain durable after review. An identified reviewed `.evt` contains the one selected authoritative association; if no acceptable event exists, the reviewed/unidentified workflow retains an empty `.evt`.
 
+Following the same reorganization, the former `events/` tree is preserved at `events/legacy/princeton/`. The former `events_everyone/` tree now occupies the canonical `events/` path. The legacy Princeton tree is historical context, not part of the active candidate or reviewed-outcome paths represented by `events/reviewed/...`.
+
 `records/` is a separate raw-data normalization branch. `mermaid-records` consumes raw data directly, not `processed/`, `waveforms/`, instrument metadata, `associations/`, or `catalogs/`. `timelines/` is downstream of `records/`. `buffers/` is likewise a separate acquisition/data trunk, with continuous or year-scale observations and its own timing and QC needs; it is not a DET/REQ subtype or a consequence of the main `server/` to `processed/` workflow.
 
 ## Curated views and publication
